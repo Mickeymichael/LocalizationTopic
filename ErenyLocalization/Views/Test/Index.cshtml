@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Mvc.Localization
+
+
+
+@inject IOptions<RequestLocalizationOptions> locOptions
+@inject IViewLocalizer localizer
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+
+<a class="btn btn-primary" asp-action="Create">@localizer["Create"]</a>
+
+<table class="table">
+    <tr>
+        <td>@localizer["Culture"]</td>
+        <td>
+            @requestCulture.RequestCulture.Culture.Name
+        </td>
+    </tr>
+    <tr>
+        <td>@localizer["UICulture"]</td>
+        <td>
+            @requestCulture.RequestCulture.UICulture.Name
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>
+            @localizer["Date"]
+        </td>
+        <td>
+            @DateTime.Now.ToLongDateString()
+        </td>
+    </tr>
+
+
+
+    <tr>
+        <td>@localizer["Currency"]</td>
+        <td>@(10000.00.ToString("c"))</td>
+    </tr>
+</table>
